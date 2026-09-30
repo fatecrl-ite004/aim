@@ -1,4 +1,4 @@
-# Documento Base do Projeto — AIM (Active Orchestration Service)
+# Documento Base do Projeto — AIM (Active Intelligence Monitoring)
 
 > Documento de trabalho consolidado a partir do projeto original, do BRIEF, das discussões realizadas e dos papers de referência selecionados.
 >
@@ -8,8 +8,8 @@
 
 ## 1. Identificação do Projeto
 
-- **Nome:** AIM — Active Orchestration Service
-- **Título do TCC / Projeto:** Análise multivariada e correlação de anomalias temporais em infraestruturas computacionais e o impacto em aplicações web/APIs
+- **Nome:** AIM — Active Intelligence Monitoring
+- **Título do TCC / Projeto:** Análise multivariada e correlação de anomalias temporais em infraestruturas computacionais
 - **Equipe:** Pedro Augusto de Melo Borges, Thiago Guerra Soares e João Paulo Cruz de Almeida Lima
 - **Público-Alvo:** Times de SRE, DevOps, Tech Leads e Engenharia de Software
 - **Tecnologia de Ingestão:** OpenTelemetry Protocol (OTLP)
