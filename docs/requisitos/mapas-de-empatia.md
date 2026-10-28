@@ -1,10 +1,12 @@
 # AIM — Mapas de Empatia
 
+**Revisado em:** 28 de outubro de 2026
+
 > Hipóteses de experiência das personas no contexto do projeto.
 >
 > Estrutura: **Pensa e Sente • Vê • Ouve • Fala e Faz • Dores • Ganhos**
 >
-> Observação: os mapas representam hipóteses sobre a experiência das personas no contexto do AIM.
+> Observação: os mapas representam hipóteses sobre a experiência das personas no contexto do AIM. O **SOC Lead / Líder de Suporte de Produtos** é tratado como liderança de suporte operacional e triagem de eventos de produto, sem pressupor atuação em cibersegurança.
 
 ---
 
@@ -106,7 +108,7 @@ Outro problema é descobrir uma situação somente depois que os usuários come�
 
 O SOC Lead ganha quando consegue identificar rapidamente eventos relevantes, reduzir triagens desnecessárias, entender qual produto e componente estão envolvidos e receber contexto suficiente para encaminhar o problema.
 
-O valor do AIM para essa persona está principalmente em transformar muitos sinais em informações mais úteis para a triagem.
+O valor esperado do AIM para essa persona está em organizar sinais e contexto para apoiar a triagem; a redução de ruído precisa ser demonstrada.
 
 ---
 
@@ -229,3 +231,7 @@ O SRE ganha principalmente tempo e contexto para investigar.
 Uma visão que reúna API, servidor e banco, considere a evolução temporal dos sinais e destaque comportamentos relevantes pode ajudá-lo a direcionar a investigação mais rapidamente.
 
 Para essa persona, o valor central do AIM é ajudá-lo a entender o que está acontecendo antes que precise descobrir tudo manualmente.
+
+
+
+

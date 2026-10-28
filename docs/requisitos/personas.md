@@ -1,8 +1,12 @@
 # AIM Personas
 
+**Revisado em:** 28 de outubro de 2026
+
 AIM — Personas
 
-Personas para o contexto de observabilidade ativa
+Personas para o contexto de monitoramento inteligente e análise de telemetria
+
+Neste documento, **SOC Lead** designa a liderança de suporte operacional e triagem de eventos de produtos; o termo não amplia o escopo do AIM para operações de cibersegurança.
 
 1. Carlos Henrique — Arquiteto de Soluções
 
@@ -32,7 +36,7 @@ As personas enxergam o mesmo problema em níveis diferentes. O Arquiteto de Solu
 
 | Frustrações/Dores | • Falhas em sistemas não monitoradas e previstas. / • Descobrir problemas na aplicação somente após impacto para o usuário. / • Dificuldade para identificar antecipadamente sinais de degradação da solução. / • Dificuldade para relacionar problemas entre API, servidor e banco de dados. |
 
-| Expectativas | • Geração de previsões de possíveis erros ou degradações nas soluções criadas. / • Receber notificações antecipadas sobre riscos identificados na aplicação. / • Identificar relações entre diferentes componentes que possam indicar um problema futuro. / • Utilizar dados históricos para compreender e melhorar a confiabilidade das aplicações. |
+| Expectativas | • Geração de previsões de possíveis erros ou degradações nas soluções criadas. / • Receber notificações contextualizadas sobre sinais observados e, quando validado, possíveis riscos para a aplicação. / • Identificar relações entre diferentes componentes que possam indicar um problema futuro. / • Utilizar dados históricos para compreender e melhorar a confiabilidade das aplicações. |
 
 | Contextos de Uso | • Durante o acompanhamento de aplicações desenvolvidas e arquitetadas. / • Durante a validação da confiabilidade de uma nova solução. / • Quando uma aplicação apresenta sinais de degradação. / • Ao investigar problemas relacionados à API, servidor e banco de dados. |
 
@@ -48,7 +52,7 @@ As personas enxergam o mesmo problema em níveis diferentes. O Arquiteto de Solu
 
 | Localização | A definir |
 
-| Competência Digital | Alta. Possui conhecimento em segurança, monitoramento, análise de eventos, gestão de incidentes e ferramentas de observabilidade e segurança. |
+| Competência Digital | Alta. Possui conhecimento em monitoramento de aplicações e infraestrutura, análise de eventos operacionais, gestão de incidentes de produto e ferramentas de observabilidade e suporte. |
 
 | Objetivos | • Garantir que eventos relevantes sejam identificados rapidamente. / • Reduzir o tempo entre a identificação e a comunicação de um incidente. / • Garantir que eventos críticos recebam a devida atenção. / • Reduzir o impacto de incidentes sobre os sistemas e serviços. |
 
@@ -98,7 +102,7 @@ As personas enxergam o mesmo problema em níveis diferentes. O Arquiteto de Solu
 
 | Frustrações/Dores | • Alertas disparados somente quando o problema já está ocorrendo. / • Grande quantidade de métricas para analisar simultaneamente. / • Dificuldade para correlacionar sinais entre aplicação, servidor e banco de dados. / • Falsos positivos que geram alertas desnecessários. / • Falsos negativos que permitem que incidentes ocorram sem alerta antecipado. |
 
-| Expectativas | • Identificar degradações antes que elas se transformem em incidentes. / • Correlacionar métricas de diferentes componentes. / • Utilizar histórico para identificar padrões recorrentes. / • Receber alertas baseados em risco e não apenas em thresholds. / • Reduzir falsos positivos sem aumentar falsos negativos de forma excessiva. |
+| Expectativas | • Investigar degradações e avaliar se alguns sinais podem ser identificados antes dos eventos. / • Correlacionar métricas de diferentes componentes. / • Utilizar histórico para identificar padrões recorrentes. / • Receber informações contextualizadas e, se validado nos cenários, sinais de risco além de limites simples. / • Reduzir falsos positivos sem aumentar falsos negativos de forma excessiva. |
 
 | Contextos de Uso | • Monitoramento contínuo dos serviços. / • Durante análise de desempenho e confiabilidade. / • Durante investigação de incidentes. / • Ao receber alertas sobre degradação ou risco futuro. / • Na análise de métricas históricas. |
 
@@ -115,3 +119,9 @@ As personas enxergam o mesmo problema em níveis diferentes. O Arquiteto de Solu
 | Product Owner | Impacto no produto e no usuário | Antecipar problemas que possam virar impacto ao usuário |
 
 | SRE | Confiabilidade operacional | Correlacionar sinais e antecipar incidentes |
+
+
+
+
+
+

@@ -1,4 +1,8 @@
-AIM — Cenários de Uso
+# AIM — Cenários de Uso
+
+**Revisado em:** 28 de outubro de 2026
+
+> Os cenários registram situações e resultados desejados, não funcionalidades implementadas. Sinalização de risco depende de validação experimental; correlação temporal não comprova causalidade.
 
 Template: Persona, Objetivo, Contexto, Motivação, Ações, Resultado Esperado, Problema Identificado e Oportunidade de Design
 
@@ -36,7 +40,7 @@ Diminuir o tempo para identificar o componente relacionado a uma degradação
 | Objetivo | Mapear possíveis gaps de arquitetura em ambientes de testes, visando aumentar a precisão em relação às limitações do sistema. |
 | Contexto | Carlos está validando uma nova solução antes de disponibilizá-la para produção. A arquitetura possui uma API, um servidor e um banco de dados, e ele precisa verificar se esses componentes conseguem operar adequadamente dentro das condições esperadas. |
 | Motivação | Mitigar possíveis problemas arquiteturais antes da disponibilização da solução. |
-| Ações | Carlos acompanha o ambiente de testes durante a execução dos cenários planejados. Consulta os indicadores da aplicação e recebe notificações do AIM quando algum comportamento ultrapassa os limites definidos ou apresenta risco de degradação. Em seguida, verifica o componente envolvido, discute o comportamento com a equipe técnica e avalia se alguma alteração na arquitetura é necessária. |
+| Ações | Carlos acompanha o ambiente de testes durante a execução dos cenários planejados. Consulta os indicadores da aplicação e recebe notificações do AIM quando a análise destacar um comportamento relevante; eventual sinalização de risco dependerá de validação no cenário. Em seguida, verifica o componente envolvido, discute o comportamento com a equipe técnica e avalia se alguma alteração na arquitetura é necessária. |
 | Resultado Esperado | Menor quantidade de problemas arquiteturais identificados somente após a entrada em produção e redução de retrabalho. |
 | Problema Identificado | Dificuldade de identificar, ainda em ambiente de testes, comportamentos de API, servidor ou banco que possam revelar limitações da arquitetura antes da implantação. |
 | Oportunidade de Design | Oferecer uma visão integrada do comportamento da solução, com monitoramento, análise de métricas, identificação de riscos e notificações que apoiem a decisão antes da entrada em produção. |
@@ -48,7 +52,7 @@ Diminuir o tempo para identificar o componente relacionado a uma degradação
 | Contexto | Carlos é responsável por uma solução que já está em produção. Com o aumento do volume de usuários e requisições, componentes da arquitetura podem apresentar comportamentos diferentes dos observados nos testes. Por exemplo, a API pode apresentar aumento de latência enquanto o banco e o servidor também mostram alterações. |
 | Motivação | Identificar limitações arquiteturais que só aparecem durante o uso real e obter evidências para orientar futuras decisões de evolução da arquitetura. |
 | Ações | Carlos acompanha periodicamente os indicadores da solução. Ao receber uma notificação do AIM, consulta as métricas da API, do servidor e do banco relacionadas ao evento, compara o comportamento atual com o histórico e verifica relações entre os sinais observados. Depois, discute com a equipe se é necessário dimensionar, alterar ou evoluir algum componente. |
-| Resultado Esperado | Identificação antecipada de limitações arquiteturais em produção e geração de evidências para orientar a evolução da solução. |
+| Resultado Esperado | Identificação de comportamentos relevantes e geração de evidências para orientar a investigação de limitações arquiteturais em produção. |
 | Problema Identificado | Limitações arquiteturais podem aparecer somente após a solução começar a receber carga real, tornando a identificação e a análise mais reativas. |
 | Oportunidade de Design | Apresentar uma visão histórica e correlacionada dos componentes da solução, permitindo comparar comportamento esperado e observado e apoiar decisões de evolução. |
 
@@ -106,3 +110,10 @@ Diminuir o tempo para identificar o componente relacionado a uma degradação
 | Resultado Esperado | Redução do tempo de investigação e maior precisão no direcionamento da análise. |
 | Problema Identificado | A investigação de uma degradação pode exigir a consulta manual de diferentes componentes e a comparação de métricas espalhadas em diferentes fontes. |
 | Oportunidade de Design | Correlacionar informações da API, servidor e banco em um único contexto de incidente, apresentando a sequência temporal dos eventos e os sinais mais relevantes para a investigação. |
+
+
+
+
+
+
+
