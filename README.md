@@ -1,114 +1,119 @@
 # AIM — Active Intelligent Monitoring
 
-> Documento-base do projeto acadêmico e da prova de conceito (PoC). Atualizado em 28 de outubro de 2026.
->
-> **Direção vigente:** analisar anomalias temporais multivariadas em métricas de infraestrutura e APIs, apresentar evidências em uma aplicação web e apoiar a investigação operacional. Modelos, limiares, cenários e resultados ainda dependem de definição e avaliação experimental.
+O AIM (*Active Intelligent Monitoring*) é um projeto acadêmico de pesquisa aplicada e prova de conceito. O trabalho investiga a análise multivariada de anomalias temporais em métricas de infraestrutura e de aplicações/API, com o objetivo de apoiar equipes de desenvolvimento e confiabilidade na investigação de degradações.
 
-## Identidade do projeto
+**Título do TCC:** *AIM: Uma análise multivariada de anomalias temporais em infraestruturas computacionais*
 
-- **Nome:** AIM — Active Intelligent Monitoring.
-- **Título do TCC:** *AIM: Uma análise multivariada de anomalias temporais em infraestruturas computacionais*.
-- **Equipe:** Pedro Augusto de Melo Borges, Thiago Guerra Soares e João Paulo Cruz de Almeida Lima.
-- **Natureza:** pesquisa aplicada e PoC acadêmica.
-- **Telemetria prevista:** métricas de infraestrutura e de aplicação/API transportadas por OTLP.
-- **Usuários de referência:** equipes de confiabilidade e desenvolvimento, liderança de suporte de produtos, arquitetura e gestão de produto.
+**Estado:** pesquisa e definição da PoC. As funcionalidades e tecnologias descritas como previstas ainda não representam uma aplicação implementada.
 
-## Problema e objetivo
+## Funcionalidades e escopo
 
-Em sistemas computacionais, sinais de infraestrutura e sintomas percebidos pela aplicação são frequentemente examinados em painéis separados. A análise manual pode tornar difícil entender quando uma alteração começou, quais sinais mudaram em conjunto e se o comportamento observado coincide com uma degradação de API. Limites estáticos podem ser úteis em alguns contextos, mas também podem gerar ruído quando a variação normal depende de carga, sazonalidade ou cenário.
+A proposta de pesquisa e da PoC contempla:
 
-O AIM investiga como coletar e analisar séries temporais multivariadas para identificar anomalias, relacionar padrões de infraestrutura a efeitos observados em APIs e apresentar evidências que ajudem uma pessoa a investigar. Também será avaliado se certos métodos permitem sinalizar risco antes do início de eventos rotulados. Antecipação é uma hipótese experimental, não uma capacidade garantida.
+- Receber métricas de infraestrutura e de aplicação/API por OTLP.
+- Organizar séries temporais por serviço, componente ou cenário.
+- Investigar métodos estatísticos e de aprendizado de máquina para detecção de anomalias.
+- Relacionar temporalmente sinais de infraestrutura e sintomas observados em APIs, sem presumir causalidade.
+- Apresentar séries, intervalos, scores, indicadores e contexto em uma aplicação web com controle de acesso por perfil (RBAC).
+- Avaliar a detecção e, se houver cenários e rótulos adequados, a possível antecipação de eventos e o apoio à investigação.
 
-**Pergunta de pesquisa de trabalho:** como a análise conjunta e temporal de métricas de infraestrutura e API pode contribuir para identificar degradações e apoiar sua investigação, quando comparada a baselines definidos para os mesmos cenários?
+Esses itens descrevem objetivos de pesquisa, não funcionalidades já disponíveis. Logs, traces e topologia podem ser considerados como complementos, mas não são requisitos assumidos para o núcleo baseado em métricas.
 
-## Escopo e fronteiras
+O AIM não prevê correções automáticas em código ou infraestrutura, criação de commits ou pull requests, deploy ou remediação autônoma. Um eventual uso de LLM seria complementar à apresentação de evidências, sem atuar como decisor.
 
-A PoC considera ingestão de métricas OTLP, organização temporal dos dados, análise estatística e/ou modelos em investigação, apresentação web com visualizações e indicadores, e controle de acesso por perfil (RBAC). O escopo de análise se concentra em métricas de infraestrutura — por exemplo CPU, memória, I/O e rede — e de aplicação/API — por exemplo latência, throughput e erros. A lista efetiva depende dos cenários e da disponibilidade de instrumentação.
+## Tecnologias previstas
 
-A aplicação deve apoiar a investigação mostrando séries, intervalos, scores e sinais associados a um evento. A correlação temporal pode revelar associação útil, mas não demonstra por si só que uma métrica causou outra. Logs, traces e topologia podem ser complementos se forem disponíveis e se sua inclusão for justificada; não são pré-requisitos assumidos para o núcleo da PoC.
+A stack indicada para o desenvolvimento é:
 
-O AIM não executa correções automáticas em código ou infraestrutura, não cria commits ou pull requests, não faz deploy e não substitui a decisão de operadores. Notificação, canal de entrega e funcionalidades detalhadas ainda precisam ser definidos. Um LLM, caso investigado, é componente complementar para apresentar ou organizar evidências já produzidas, sujeito a validação; não é motor decisor nem funcionalidade garantida.
+- **Linguagem:** Python.
+- **Backend/API:** FastAPI.
+- **Banco de dados:** PostgreSQL.
+- **Aprendizado de máquina:** PyTorch.
+- **Frontend:** React com Node.js no ambiente de desenvolvimento e build.
 
-## Arquitetura conceitual proposta
+A integração entre os componentes, versões, ferramentas auxiliares e configuração ainda está **a definir**. A arquitetura conceitual não determina se a inferência será integrada ao backend ou executada como serviço independente.
 
-```text
-Infraestrutura e APIs
-        │ métricas via OTLP
-        ▼
-Ingestão, validação e alinhamento temporal
-        ▼
-Armazenamento e preparação das séries
-        ▼
-Baselines estatísticos e métodos em avaliação
-        ▼
-Scores, eventos e associações temporais
-        ▼
-Aplicação web: visualização, contexto e RBAC
-        ▼
-Investigação e decisão por pessoas
+## Pré-requisitos
+
+Para consultar este repositório, é necessário ter Git instalado. Os pré-requisitos para executar a aplicação serão definidos junto com a implementação. A instalação de Python, Node.js, PostgreSQL e dependências ainda não pode ser descrita como um procedimento executável, pois os componentes da PoC não foram implementados e as versões ainda não foram fixadas.
+
+## Instalação e configuração
+
+### Obter o código-fonte
+
+```bash
+git clone URL_DO_REPOSITORIO
+cd aim
 ```
 
-Este fluxo representa uma arquitetura de pesquisa, não uma stack fechada ou implementação concluída. Persistência, frequência, retenção, normalização, componentes de software e método de detecção permanecem decisões em aberto. OTLP padroniza transporte e representação da telemetria; não define detector, interpretação nem qualidade dos dados.
+Substitua `URL_DO_REPOSITORIO` pelo endereço do repositório utilizado pela equipe.
 
-## Objetivos analíticos que não devem ser confundidos
+### Dependências e ambiente
 
-- **Detecção de anomalia:** identificar observações, janelas ou eventos que diferem do comportamento de referência. É preciso definir unidade, score e regra de decisão.
-- **Forecasting:** estimar valores futuros de uma série. Erro de previsão não equivale automaticamente a risco de incidente.
-- **Antecipação ou risco:** estimar se um evento definido ocorrerá dentro de um horizonte. Exige rótulos, horizonte, comparação e medida de antecedência; ainda é uma hipótese a avaliar.
-- **Change point:** localizar uma alteração de regime. Uma mudança pode ser uma nova condição normal, não necessariamente uma anomalia ou falha.
-- **Correlação e associação temporal:** descrever sinais que variam juntos ou em sequência. Isso não prova direção causal.
-- **RCA e causalidade:** ordenar ou explicar causas candidatas sob dados e hipóteses específicos. RCA é uma linha de investigação complementar; o AIM não deve afirmar diagnóstico causal sem desenho e evidência que o sustentem.
+**A definir.** Quando a implementação começar, esta seção deverá informar como instalar as dependências de Python e JavaScript, configurar o PostgreSQL e preencher variáveis de ambiente. Credenciais reais não devem ser armazenadas no repositório.
 
-## Plano de avaliação a definir
+## Execução em ambiente de desenvolvimento
 
-A avaliação deve começar com cenários experimentais explícitos e um *ground truth* auditável, por exemplo degradações controladas com início, duração, componente e impacto conhecidos. A divisão de dados precisa respeitar cronologia: ajustar transformações e modelos apenas no período de treino, escolher parâmetros e limiares na validação e reservar um período futuro para teste. Janelas ou rótulos que compartilhem observações entre partições, normalização ajustada com dados futuros, escolha de limiar com rótulos do teste e seleção repetida do melhor resultado no teste podem causar vazamento e devem ser evitadas.
+**A definir.** Ainda não há comandos de inicialização para backend, frontend ou pipeline analítico. Eles serão documentados quando os componentes e seus scripts forem implementados.
 
-Comparações devem usar a mesma telemetria, cenário, split e regra de avaliação. Baselines candidatos incluem limites estáticos configurados por cenário e métodos estatísticos simples; a seleção final depende do desenho experimental. Métodos mais complexos só devem ser mantidos se apresentarem contribuição mensurável. Repetições/sementes são relevantes quando houver aleatoriedade. Ablações podem retirar, por vez, métricas de infraestrutura, métricas de API, dependências multivariadas, contexto temporal ou componentes opcionais, para estimar o que cada grupo acrescenta.
+## Estrutura do projeto
 
-Reportar métricas pontuais e por evento: precisão, recall e F1 conforme definição explícita; PR-AUC quando apropriada ao desbalanceamento; eventos detectados, eventos perdidos, falsos alertas por unidade de tempo/serviço, atraso de detecção e antecedência somente para um alvo de risco definido. Métricas event-wise devem declarar tolerância temporal e regra de correspondência. Evitar depender exclusivamente de point-adjust ou do melhor limiar retrospectivo, pois podem inflar a avaliação e não representam necessariamente uso prospectivo. Também medir custo computacional, atraso e, se viável, overhead da instrumentação.
+```text
+aim/
+├── archive/   # Materiais da concepção anterior, preservados como histórico
+├── data/      # Convenções e orientações para dados
+├── docs/      # Projeto, requisitos, arquitetura, pesquisa e decisões
+├── infra/     # Espaço reservado a materiais de infraestrutura
+├── research/  # Espaço reservado a experimentos reproduzíveis
+├── scripts/   # Espaço reservado a scripts de apoio
+├── system/    # Destino previsto para a aplicação PoC
+└── README.md  # Visão geral e navegação do projeto
+```
 
-Para associações com APIs, analisar alinhamento, defasagens e consistência entre cenários. Uma alteração de infraestrutura que precede um sintoma é evidência temporal, não prova de causa. Se houver avaliação de ranking de sinais, usar falhas controladas ou avaliação especializada e relatar estabilidade e limitações. Não comparar números de artigos com números da PoC como se fossem diretamente equivalentes.
+As pastas `research/` e `system/` ainda contêm apenas documentação e marcadores. Não há scripts de análise, notebooks, modelos ou componentes da aplicação implementados. Consulte o README de cada área antes de interpretar sua finalidade.
 
-## Evidências da literatura local e limites
+## Objetivos analíticos e limites
 
-As sínteses em `docs/pesquisa/estado-da-arte/` orientam perguntas e protocolos, não uma alegação de que o AIM já implementa esses métodos ou supera alternativas:
+O projeto distingue objetivos que exigem definições e avaliações próprias:
 
-- **Observabilidade:** Sakinala (2025) organiza práticas cloud-native; Bissig (2024) combina entrevistas, protótipos e benchmark sintético e mostra que overhead depende da configuração; Vani (2025) relata resultados operacionais promissores, mas os detalhes disponíveis não permitem atribuição ou reprodução independentes. Use-os para requisitos de instrumentação e mensuração, não como garantia de ganho.
-- **Detecção:** Chandola, Banerjee e Kumar (2009) oferecem taxonomia; Garg et al. (2021) mostram dependência do ranking em relação ao scoring e propõem avaliação por evento; Islam et al. (2021) descrevem sistema industrial; Huang et al. (2017) e Wagner et al. (2023) oferecem métodos e protocolos/benchmark. Datasets, rótulos, limiares e métricas variam, sem vencedor universal.
-- **Séries e mudanças:** Aminikhanghahi e Cook (2017) distinguem métodos de change point; Sivaraman (2022) motiva limiares adaptativos, mas o resumo consultado não descreve detalhe suficiente para reproduzir seu percentual reportado; TopoMAD (He et al., 2020/2021) e InterFusion (Su et al., 2021) são candidatos de pesquisa para dependências temporais e entre métricas, não escolhas finais do AIM. Resultados com limiar ótimo ou point-adjust exigem cautela prospectiva.
-- **Correlação e RCA:** Soldani e Brogi (2021) organizam técnicas e requisitos; Wu et al. (2021) observam que desempenho causal varia por falha e seleção de sinais; Sleuth (Gan et al.) e TraceDiag (Ding et al., 2023) exploram traces/topologia e dados específicos. Esses métodos requerem entradas e ground truth mais ricos, e seus resultados não autorizam atribuir causalidade a correlações de métricas agregadas.
+- **Detecção de anomalias:** identificar observações, janelas ou eventos diferentes do comportamento de referência.
+- **Previsão de valores:** estimar valores futuros; erro de previsão não equivale automaticamente a risco de incidente.
+- **Estimativa de risco/antecipação:** estimar se um evento definido ocorrerá dentro de um horizonte, usando rótulos e critérios explícitos.
+- **Detecção de mudança (change point):** localizar alteração de regime, que pode representar uma nova condição normal.
+- **Associação temporal:** descrever sinais que variam juntos ou em sequência; isso não demonstra causa.
+- **RCA e causalidade:** investigar causas candidatas com dados e hipóteses apropriados. O AIM não deve afirmar diagnóstico causal sem evidência que o sustente.
 
-Para a leitura detalhada, limites de evidência e referências completas, consulte as [quatro sínteses ampliadas](docs/pesquisa/estado-da-arte/) ([observabilidade](docs/pesquisa/estado-da-arte/Sintese%20ampliada%20para%20AIM%20-%20Secao%201%20Observabilidade.md), [detecção](docs/pesquisa/estado-da-arte/Sintese%20ampliada%20para%20AIM%20-%20Secao%202%20Deteccao%20de%20anomalias.md), [séries temporais](docs/pesquisa/estado-da-arte/Sintese%20ampliada%20para%20AIM%20-%20Secao%203%20Series%20temporais.md) e [correlação e RCA](docs/pesquisa/estado-da-arte/Sintese%20ampliada%20para%20AIM%20-%20Secao%204%20Correlacao%20e%20RCA.md)) e os respectivos resumos reutilizáveis. As referências bibliográficas aqui seguem os títulos e atribuições dessas sínteses locais; este documento não afirma constituir revisão global atualizada.
+Limites estáticos e variáveis são alternativas a avaliar por cenário; nenhum método é assumido como universalmente superior. Autoencoders, LSTM, modelos baseados em grafos, filtragem por similaridade vetorial, retreinamento diante de mudanças, TopoMAD e InterFusion são linhas ou referências candidatas, não escolhas finais nem funcionalidades implementadas.
+
+## Avaliação planejada
+
+O protocolo experimental ainda precisa definir cenários, eventos e *ground truth* auditável; métricas e frequência; alinhamento e tratamento de lacunas; baselines e modelos; scores e limiares; e critérios de avaliação por ponto e por evento.
+
+A avaliação deverá respeitar a cronologia dos dados: treino, validação e teste em períodos separados. Normalização, hiperparâmetros e limiares devem ser ajustados sem consultar o teste. As comparações precisam usar condições equivalentes e reportar falsos alertas, atraso de detecção, custos e limitações. Alegações de antecipação exigem horizonte e regra de correspondência definidos. O valor incremental das métricas de infraestrutura em relação às de API também permanece uma questão de pesquisa.
+
+## Pesquisa e referências
+
+As sínteses locais de literatura servem para orientar perguntas e protocolos; não provam que o AIM implementa os métodos descritos nem que supera alternativas. Entre as referências estudadas estão trabalhos sobre observabilidade cloud-native, avaliação de detecção por evento, séries temporais, mudança de regime, dependências entre métricas e RCA. Resultados publicados usam dados, rótulos e protocolos distintos e não devem ser comparados diretamente aos resultados futuros da PoC.
+
+Consulte as [sínteses ampliadas do estado da arte](docs/pesquisa/estado-da-arte/) e o [protocolo experimental](docs/pesquisa/protocolo-experimental.md) para detalhes, referências e limites de evidência.
 
 ## Decisões em aberto
 
-- Cenários, carga, eventos e rótulos (*ground truth*).
-- Métricas, granularidade, frequência, alinhamento, retenção e tratamento de lacunas.
-- Baselines e famílias de modelos a comparar.
-- Definição de limiar fixo ou variável por cenário e método de calibração sem vazamento.
-- Distinção operacional entre detecção, previsão de valores, risco, change point e diagnóstico.
-- Métricas pontuais, event-wise e operacionais, tolerâncias e horizonte de avaliação.
-- Contribuição incremental de infraestrutura além das métricas de API.
-- Requisitos da aplicação, perfis RBAC, visualizações e fluxo de investigação.
-- Custo de coleta, processamento, armazenamento e modelos.
-- Se LLM será avaliado como apoio de apresentação, com limites e validação adequados.
+Permanecem a definir: cenários e rotulagem; métricas, frequência e retenção; modelos, baselines e limiares; protocolo temporal e métricas event-wise; requisitos da aplicação, perfis e visualizações; arquitetura da inferência; e custos de instrumentação, processamento e armazenamento. As decisões devem ser registradas quando houver uma escolha explícita e justificável. Até o momento, não há ADR aceita.
 
-## Mapa da documentação
+## Equipe
 
-- `docs/projeto/estado-atual.md`: direção vigente, escopo e pendências.
-- `docs/projeto/historico.md`: evolução entre concepção inicial e pesquisa atual.
-- `docs/requisitos/personas.md`, `docs/requisitos/mapas-de-empatia.md` e `docs/requisitos/cenarios-de-uso.md`: hipóteses de usuários e situações de uso; expectativas não equivalem a funcionalidades já implementadas.
-- `docs/apresentacoes/pitch-ia.md`: narrativa concisa do problema e da proposta, alinhada ao escopo experimental.
-- `archive/aim_old/`: documentos da concepção anterior, mantidos como histórico e ignorados pelo Git.
+| Integrante | Responsabilidade |
+| --- | --- |
+| Pedro Augusto de Melo Borges | A definir |
+| Thiago Guerra Soares | A definir |
+| João Paulo Cruz de Almeida Lima | A definir |
 
-## Como navegar na estrutura reorganizada
+## Documentação adicional
 
 - [Visão e escopo](docs/projeto/visao-e-escopo.md), [estado atual](docs/projeto/estado-atual.md), [histórico](docs/projeto/historico.md) e [glossário](docs/projeto/glossario.md).
 - [Requisitos](docs/requisitos/requisitos.md), [personas](docs/requisitos/personas.md), [mapas de empatia](docs/requisitos/mapas-de-empatia.md) e [cenários de uso](docs/requisitos/cenarios-de-uso.md).
-- [Arquitetura conceitual](docs/arquitetura/visao-geral.md), [pipeline analítico](docs/arquitetura/pipeline-analitico.md) e [modelo/dicionário de dados](docs/arquitetura/dados/modelo-de-dados.md).
-- [Pesquisa documentada](docs/pesquisa/README.md), [sínteses locais](docs/pesquisa/estado-da-arte/) e [protocolo experimental](docs/pesquisa/protocolo-experimental.md).
-- [Pesquisa executável](research/README.md), [sistema PoC](system/README.md), [convenções de dados](data/README.md) e [infraestrutura](infra/README.md).
-- [Pitch](docs/apresentacoes/pitch-ia.md), [decisões](docs/decisoes/README.md), [desenvolvimento](docs/desenvolvimento/README.md) e [arquivo histórico](archive/README.md).
-
-A estrutura diferencia documentação de pesquisa (`docs/pesquisa/`), artefatos experimentais executáveis (`research/`) e componentes de sistema (`system/`). Pastas vazias representam destinos organizacionais, não implementação ou decisão de tecnologia.
-
+- [Arquitetura conceitual](docs/arquitetura/visao-geral.md), [pipeline analítico](docs/arquitetura/pipeline-analitico.md), [backend](docs/arquitetura/backend.md), [frontend](docs/arquitetura/frontend.md) e [modelo de dados](docs/arquitetura/dados/modelo-de-dados.md).
+- [Documentação da pesquisa](docs/pesquisa/README.md), [perguntas e hipóteses](docs/pesquisa/perguntas-e-hipoteses.md), [sínteses do estado da arte](docs/pesquisa/estado-da-arte/) e [decisões](docs/decisoes/README.md).
+- [Pesquisa executável](research/README.md), [sistema PoC](system/README.md), [dados](data/README.md), [infraestrutura](infra/README.md), [scripts](scripts/README.md) e [apresentações](docs/apresentacoes/README.md).
+- [Histórico da migração](docs/desenvolvimento/migracao-2026-10-28.md) e [arquivo de materiais anteriores](archive/README.md).
