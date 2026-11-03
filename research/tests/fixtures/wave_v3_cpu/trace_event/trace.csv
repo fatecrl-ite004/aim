@@ -1,0 +1,5 @@
+timestamp,cmdb_id,duration,type,status_code,parent_span
+90000000,frontend,10,request,0,
+100000000,currencyservice,20,request,0,abc
+110000000,frontend,30,request,0,
+130000000,currencyservice,40,request,0,def

@@ -1,0 +1,7 @@
+﻿timestamp,cmdb_id,kpi_name,value
+100,checkout-0.source.checkout.payment,istio_requests_total.grpc.200.0,20
+105,checkout-0.source.checkout.payment,istio_requests_total.grpc.200.0,29
+100,checkout-0.source.checkout.payment,istio_requests_total.grpc.200.14,1
+105,checkout-0.source.checkout.payment,istio_requests_total.grpc.200.14,2
+100,checkout-0.source.checkout.redis,istio_requests_total.grpc.200.0,50
+105,checkout-0.source.checkout.redis,istio_requests_total.grpc.200.0,55

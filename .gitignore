@@ -1,3 +1,13 @@
 # O legado permanece fora do histórico versionado.
 archive/aim_old/
 
+# Planos de trabalho locais, fora do historico versionado.
+/plans/
+/research/reports/wave_cpu_api/generated/
+/research/reports/wave_v3_cpu/generated/
+/research/reports/rcaeval_re2ob/generated/
+/research/reports/ad_microservice_app/generated/
+/research/data/
+__pycache__/
+*.py[cod]
+
