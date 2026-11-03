@@ -1,6 +1,6 @@
 # Estado atual do AIM
 
-**Atualizado em:** 28 de outubro de 2026  
+**Atualizado em:** 3 de novembro de 2026
 **Identidade:** AIM — Active Intelligent Monitoring  
 **Título do TCC:** *AIM: Uma análise multivariada de anomalias temporais em infraestruturas computacionais*.
 
@@ -47,6 +47,10 @@ Definir cenários e ground truth; separar períodos cronologicamente em treino, 
 - Valor incremental dos sinais de infraestrutura em relação aos de API.
 - Requisitos da aplicação web, perfis, visualizações e fluxo de investigação.
 - Custo de instrumentação, processamento e armazenamento.
+
+## Implementação de frontend demonstrativo
+
+Em 3 de novembro de 2026 foi incorporado em `frontend/` um mock React navegável com cenários e dados simulados. Ele permite explorar os fluxos de interface documentados, incluindo serviços, métricas de exemplo, incidentes simulados, notificações e auditoria local. O estado é salvo no navegador. O mock não implementa backend, coleta OTLP, envio real de e-mail, autenticação/RBAC, detecção analítica nem comunicação com serviços monitorados. Sua existência não altera as hipóteses de pesquisa nem demonstra desempenho ou eficácia operacional. Consulte o [README do frontend](../../frontend/README.md).
 
 ## Relação com documentos anteriores
 

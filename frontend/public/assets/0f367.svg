@@ -1,0 +1,22 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="448" height="140" viewBox="0 0 448 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Curvas Mem&#195;&#179;ria nominal" clip-path="url(#clip0_0_772)">
+<g id="Vector">
+<path d="M0 0H448Z" fill="black"/>
+<path d="M0 0H448" stroke="#E2E8F0"/>
+</g>
+<g id="Vector_2">
+<path d="M0 70H448Z" fill="black"/>
+<path d="M0 70H448" stroke="#E2E8F0"/>
+</g>
+<g id="Vector_3">
+<path d="M0 140H448Z" fill="black"/>
+<path d="M0 140H448" stroke="#E2E8F0"/>
+</g>
+<path id="Vector_4" d="M0 89.6L112 84.56L224 85.68L336 82.88L448 84" stroke-width="2.5" stroke="#2563EB"/>
+</g>
+<defs>
+<clipPath id="clip0_0_772">
+<rect width="448" height="140" fill="white"/>
+</clipPath>
+</defs>
+</svg>

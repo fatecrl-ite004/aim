@@ -4,7 +4,7 @@ O AIM (*Active Intelligent Monitoring*) é um projeto acadêmico de pesquisa apl
 
 **Título do TCC:** *AIM: Uma análise multivariada de anomalias temporais em infraestruturas computacionais*
 
-**Estado:** pesquisa e definição da PoC. As funcionalidades e tecnologias descritas como previstas ainda não representam uma aplicação implementada.
+**Estado:** pesquisa e definição da PoC. Há um mock React de frontend com dados simulados para explorar fluxos de interface; as funcionalidades analíticas, integrações e tecnologias descritas como previstas ainda não representam uma aplicação operacional implementada.
 
 ## Funcionalidades e escopo
 
@@ -35,7 +35,7 @@ A integração entre os componentes, versões, ferramentas auxiliares e configur
 
 ## Pré-requisitos
 
-Para consultar este repositório, é necessário ter Git instalado. Os pré-requisitos para executar a aplicação serão definidos junto com a implementação. A instalação de Python, Node.js, PostgreSQL e dependências ainda não pode ser descrita como um procedimento executável, pois os componentes da PoC não foram implementados e as versões ainda não foram fixadas.
+Para consultar o repositório, é necessário ter Git instalado. Para executar o frontend demonstrativo, instale **Node.js 22.12 ou superior** e npm. A instalação do mock requer internet na primeira execução para baixar as dependências. Não é necessário configurar Python, PostgreSQL, backend, credenciais ou serviços externos para abrir a interface.
 
 ## Instalação e configuração
 
@@ -46,15 +46,30 @@ git clone URL_DO_REPOSITORIO
 cd aim
 ```
 
-Substitua `URL_DO_REPOSITORIO` pelo endereço do repositório utilizado pela equipe.
+Substitua `URL_DO_REPOSITORIO` pelo endereço do repositório utilizado pela equipe. Se o repositório já estiver na máquina, abra um terminal na pasta raiz do AIM.
 
-### Dependências e ambiente
+### Instalar as dependências do frontend
 
-**A definir.** Quando a implementação começar, esta seção deverá informar como instalar as dependências de Python e JavaScript, configurar o PostgreSQL e preencher variáveis de ambiente. Credenciais reais não devem ser armazenadas no repositório.
+No terminal, a partir da raiz do repositório, execute:
+
+```bash
+cd frontend
+npm ci
+```
+
+`npm ci` instala as versões registradas em `frontend/package-lock.json`.
 
 ## Execução em ambiente de desenvolvimento
 
-**A definir.** Ainda não há comandos de inicialização para backend, frontend ou pipeline analítico. Eles serão documentados quando os componentes e seus scripts forem implementados.
+Ainda dentro da pasta `frontend`, inicie o servidor local:
+
+```bash
+npm run dev
+```
+
+Abra no navegador o endereço informado no terminal, normalmente `http://localhost:5173`. Para encerrar, volte ao terminal e pressione `Ctrl+C`. Não abra `index.html` diretamente: a interface usa módulos que precisam do servidor Vite.
+
+A aplicação é um mock de frontend com dados simulados e persistidos no `localStorage` do navegador. Não há backend nem integração real com OTel, SMTP, banco de dados ou serviços monitorados. As opções em **Demonstração** carregam cenários locais; selecione **Operação normal** para restaurar os dados iniciais. As métricas e datas exibidas são fictícias (cenário de 08/10/2026, BRT).
 
 ## Estrutura do projeto
 
@@ -66,11 +81,12 @@ aim/
 ├── infra/     # Espaço reservado a materiais de infraestrutura
 ├── research/  # Espaço reservado a experimentos reproduzíveis
 ├── scripts/   # Espaço reservado a scripts de apoio
-├── system/    # Destino previsto para a aplicação PoC
+├── system/    # Destino previsto para os componentes da PoC
+├── frontend/  # Mock React navegável com dados simulados
 └── README.md  # Visão geral e navegação do projeto
 ```
 
-As pastas `research/` e `system/` ainda contêm apenas documentação e marcadores. Não há scripts de análise, notebooks, modelos ou componentes da aplicação implementados. Consulte o README de cada área antes de interpretar sua finalidade.
+`research/` reúne experimentos e materiais de pesquisa; consulte os READMEs dessa área para seus limites e instruções. `system/` continua reservado à PoC. O frontend demonstrativo está em `frontend/`: ele implementa fluxos de interface com dados locais simulados, sem backend ou integração operacional. Consulte `frontend/README.md` para detalhes do mock.
 
 ## Objetivos analíticos e limites
 
@@ -115,5 +131,5 @@ Permanecem a definir: cenários e rotulagem; métricas, frequência e retenção
 - [Requisitos](docs/requisitos/requisitos.md), [personas](docs/requisitos/personas.md), [mapas de empatia](docs/requisitos/mapas-de-empatia.md) e [cenários de uso](docs/requisitos/cenarios-de-uso.md).
 - [Arquitetura conceitual](docs/arquitetura/visao-geral.md), [pipeline analítico](docs/arquitetura/pipeline-analitico.md), [backend](docs/arquitetura/backend.md), [frontend](docs/arquitetura/frontend.md) e [modelo de dados](docs/arquitetura/dados/modelo-de-dados.md).
 - [Documentação da pesquisa](docs/pesquisa/README.md), [perguntas e hipóteses](docs/pesquisa/perguntas-e-hipoteses.md), [sínteses do estado da arte](docs/pesquisa/estado-da-arte/) e [decisões](docs/decisoes/README.md).
-- [Pesquisa executável](research/README.md), [sistema PoC](system/README.md), [dados](data/README.md), [infraestrutura](infra/README.md), [scripts](scripts/README.md) e [apresentações](docs/apresentacoes/README.md).
+- [Pesquisa executável](research/README.md), [sistema PoC](system/README.md), [frontend demonstrativo](frontend/README.md), [dados](data/README.md), [infraestrutura](infra/README.md), [scripts](scripts/README.md) e [apresentações](docs/apresentacoes/README.md).
 - [Histórico da migração](docs/desenvolvimento/migracao-2026-10-28.md) e [arquivo de materiais anteriores](archive/README.md).

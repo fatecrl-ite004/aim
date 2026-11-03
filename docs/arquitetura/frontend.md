@@ -1,6 +1,8 @@
-# Frontend — responsabilidades previstas
+# Frontend — mock demonstrativo
 
-A direção do projeto prevê uma aplicação web que permita consultar séries temporais, eventos/anomalias, indicadores de saúde e contexto relevante, sob controle de acesso por perfil (RBAC). Essa descrição deriva do escopo acadêmico; não há telas, framework, API de apresentação nem implementação no repositório.
+O repositório contém um frontend React navegável em [`frontend/`](../../frontend/). Ele materializa fluxos visuais de demonstração para visão geral, detalhes de serviço, cadastro, notificações e auditoria, usando dados fictícios definidos no próprio cliente e estado salvo no `localStorage`. As instruções para instalação e execução estão no [README principal](../../README.md) e no [README do frontend](../../frontend/README.md).
+
+Esta implementação não coleta telemetria nem chama backend, endpoint OTel, SMTP ou serviços monitorados. Estados de falha, conectividade, métricas, incidentes e resultados de notificações são simulados. A interface não implementa autenticação ou autorização RBAC real. Ela serve como mock para exploração dos fluxos, não como produto operacional nem como evidência de eficácia analítica.
 
 ## Questões em aberto
 
@@ -9,5 +11,6 @@ A direção do projeto prevê uma aplicação web que permita consultar séries 
 - Como score, limiar, intervalo e incerteza serão explicados?
 - Quais requisitos de acessibilidade, atualização, auditoria e responsividade se aplicam?
 - Como exibir associação temporal sem sugerir causalidade comprovada?
+- Como o frontend será integrado à API e à ingestão ainda a especificar?
 
-Não assumir dashboard, alertas em tempo real, relatórios por LLM ou gestão de incidentes como funcionalidades aprovadas. Ver [requisitos](../requisitos/requisitos.md).
+Não assumir dashboard conectado, alertas em tempo real, relatórios por LLM ou gestão operacional de incidentes como funcionalidades implementadas. Ver [requisitos](../requisitos/requisitos.md).

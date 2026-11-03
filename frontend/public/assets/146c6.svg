@@ -1,0 +1,22 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="448" height="140" viewBox="0 0 448 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Curvas CPU nominal" clip-path="url(#clip0_0_624)">
+<g id="Vector">
+<path d="M0 0H448Z" fill="black"/>
+<path d="M0 0H448" stroke="#E2E8F0"/>
+</g>
+<g id="Vector_2">
+<path d="M0 70H448Z" fill="black"/>
+<path d="M0 70H448" stroke="#E2E8F0"/>
+</g>
+<g id="Vector_3">
+<path d="M0 140H448Z" fill="black"/>
+<path d="M0 140H448" stroke="#E2E8F0"/>
+</g>
+<path id="Vector_4" d="M0 109.76L112 106.74L224 107.41L336 105.73L448 106.4" stroke-width="2.5" stroke="#2563EB"/>
+</g>
+<defs>
+<clipPath id="clip0_0_624">
+<rect width="448" height="140" fill="white"/>
+</clipPath>
+</defs>
+</svg>
