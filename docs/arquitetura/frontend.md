@@ -1,8 +1,8 @@
-# Frontend — mock demonstrativo
+# Frontend — protótipo conectado e mock
 
-O repositório contém um frontend React navegável em [`frontend/`](../../frontend/). Ele materializa fluxos visuais de demonstração para visão geral, detalhes de serviço, cadastro, notificações e auditoria, usando dados fictícios definidos no próprio cliente e estado salvo no `localStorage`. As instruções para instalação e execução estão no [README principal](../../README.md) e no [README do frontend](../../frontend/README.md).
+O repositório contém um frontend React navegável em [`frontend/`](../../frontend/). A jornada **Visão geral → Replay histórico AIOpsArena → detalhe** consulta a API e mostra o replay persistido, métricas derivadas, cobertura e ground truth separado. As telas gerais de serviço, cadastro, notificações e auditoria continuam como mock, com dados fictícios definidos no cliente e estado salvo no `localStorage`. As instruções para execução estão no [guia de deploy](../../deploy.md) e no [README do frontend](../../frontend/README.md).
 
-Esta implementação não coleta telemetria nem chama backend, endpoint OTel, SMTP ou serviços monitorados. Estados de falha, conectividade, métricas, incidentes e resultados de notificações são simulados. A interface não implementa autenticação ou autorização RBAC real. Ela serve como mock para exploração dos fluxos, não como produto operacional nem como evidência de eficácia analítica.
+As telas mock não coletam telemetria nem chamam backend, endpoint OTel, SMTP ou serviços monitorados. Na jornada conectada, o frontend consulta as rotas REST da API; não envia nem transforma métricas. A interface não implementa autenticação ou autorização RBAC real e não é produto operacional nem evidência de eficácia analítica.
 
 ## Questões em aberto
 
@@ -11,6 +11,6 @@ Esta implementação não coleta telemetria nem chama backend, endpoint OTel, SM
 - Como score, limiar, intervalo e incerteza serão explicados?
 - Quais requisitos de acessibilidade, atualização, auditoria e responsividade se aplicam?
 - Como exibir associação temporal sem sugerir causalidade comprovada?
-- Como o frontend será integrado à API e à ingestão ainda a especificar?
+- Como a jornada conectada evoluirá para além do replay histórico da PoC?
 
-Não assumir dashboard conectado, alertas em tempo real, relatórios por LLM ou gestão operacional de incidentes como funcionalidades implementadas. Ver [requisitos](../requisitos/requisitos.md).
+Não assumir telemetria contínua, alertas em tempo real, relatórios por LLM ou gestão operacional de incidentes como funcionalidades implementadas. Ver [requisitos](../requisitos/requisitos.md).

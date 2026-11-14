@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<mxfile host="app.diagrams.net" modified="2026-11-11T00:00:00.000Z" agent="AIM" version="24.7.17" type="device">
+  <diagram id="aim-replay-pipeline-v1" name="Fluxo replay V1">
+    <mxGraphModel adaptiveColors="auto" dx="2200" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="source" value="AIOpsArena&#xA;CSV métricos locais" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#0288d1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="150" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="replayer" value="Replayer AIM&#xA;preserva valores e origem" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#0288d1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="230" y="120" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="otlp" value="OTLP / HTTP&#xA;Protobuf" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#fb8c00;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="440" y="120" width="150" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="collector" value="OpenTelemetry Collector&#xA;receiver OTLP/HTTP; export síncrono" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#fb8c00;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="620" y="120" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="receiver" value="FastAPI receiver&#xA;valida e confirma após commit" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#fb8c00;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="850" y="120" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="raw" value="PostgreSQL&#xA;pontos raw e proveniência" style="shape=cylinder;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#43a047;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="120" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="batch" value="Batch AIM versionado&#xA;lê pontos raw persistidos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ede7f6;strokeColor=#7e57c2;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="120" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="derived" value="PostgreSQL&#xA;janelas, cobertura, derivados" style="shape=cylinder;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#43a047;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1530" y="120" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="api" value="API de leitura&#xA;FastAPI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#fb8c00;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1760" y="120" width="150" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ui" value="Frontend React&#xA;Dashboard → detalhe" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#0288d1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1940" y="120" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="gtfile" value="AIOpsArena&#xA;groundtruth.json" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#d81b60;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="440" y="300" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="gtimport" value="Importador separado&#xA;CLI de ground truth" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#d81b60;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="680" y="300" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="events" value="PostgreSQL&#xA;ground_truth_event" style="shape=cylinder;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#d81b60;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="950" y="300" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="event-label" value="Evento de referência&#xA;falha injetada, não detecção" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#d81b60;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="300" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="source" target="replayer" style="endArrow=block;html=1;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="replayer" target="otlp" style="endArrow=block;html=1;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="otlp" target="collector" style="endArrow=block;html=1;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="collector" target="receiver" style="endArrow=block;html=1;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="receiver" target="raw" style="endArrow=block;html=1;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="raw" target="batch" style="endArrow=block;html=1;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="batch" target="derived" style="endArrow=block;html=1;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="derived" target="api" style="endArrow=block;html=1;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="api" target="ui" style="endArrow=block;html=1;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="gtfile" target="gtimport" style="endArrow=block;html=1;strokeWidth=2;strokeColor=#d81b60;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="gtimport" target="events" style="endArrow=block;html=1;strokeWidth=2;strokeColor=#d81b60;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="events" target="event-label" style="endArrow=block;html=1;strokeWidth=2;strokeColor=#d81b60;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="aim-event-flow-v1" name="Fluxo de eventos">
+    <mxGraphModel dx="1900" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1900" pageHeight="850" math="0" shadow="0" adaptiveColors="auto">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Fluxo de eventos da V1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontFamily=Arial;fontColor=#1F2937;fontSize=24;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1600" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lane1" value="1  Ingestão e persistência" style="swimlane;horizontal=1;startSize=32;rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2F8;swimlaneFillColor=#FFFFFF;strokeColor=#54738A;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="80" width="1820" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="csv" value="CSV métrico&lt;br&gt;&lt;small&gt;arquivo de origem&lt;/small&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#64748B;fontSize=14;" vertex="1" parent="lane1">
+          <mxGeometry x="30" y="70" width="180" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="runner" value="Runner do replay&lt;br&gt;&lt;small&gt;preserva tempo e origem&lt;/small&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=14;" vertex="1" parent="lane1">
+          <mxGeometry x="260" y="70" width="190" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="collector" value="Collector OTLP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=14;" vertex="1" parent="lane1">
+          <mxGeometry x="500" y="70" width="190" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="api" value="Receiver FastAPI&lt;br&gt;&lt;small&gt;valida e grava o lote&lt;/small&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=14;" vertex="1" parent="lane1">
+          <mxGeometry x="740" y="70" width="190" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="rawdb" value="PostgreSQL&lt;br&gt;&lt;small&gt;pontos brutos e proveniência&lt;/small&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=14;" vertex="1" parent="lane1">
+          <mxGeometry x="990" y="60" width="220" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="ack" value="Confirmação OTLP&lt;br&gt;&lt;small&gt;após commit&lt;/small&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=14;" vertex="1" parent="lane1">
+          <mxGeometry x="1270" y="70" width="190" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="fail" value="Erro de ingestão&lt;br&gt;&lt;small&gt;sem confirmação de sucesso&lt;/small&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=14;" vertex="1" parent="lane1">
+          <mxGeometry x="740" y="185" width="230" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="truth" value="JSON de ground truth&lt;br&gt;&lt;small&gt;importação independente&lt;/small&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#64748B;fontSize=14;" vertex="1" parent="lane1">
+          <mxGeometry x="1500" y="70" width="240" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="truthdb" value="Eventos de referência&lt;br&gt;&lt;small&gt;armazenados separadamente&lt;/small&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=14;" vertex="1" parent="lane1">
+          <mxGeometry x="1500" y="185" width="240" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="lane2" value="2  Processamento, consulta e exportação" style="swimlane;horizontal=1;startSize=32;rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E8FF;swimlaneFillColor=#FFFFFF;strokeColor=#7C3AED;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="420" width="1820" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="batch" value="Rotina batch&lt;br&gt;&lt;small&gt;lê pontos persistidos&lt;/small&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=14;" vertex="1" parent="lane2">
+          <mxGeometry x="40" y="75" width="200" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="transform" value="Transformação versionada&lt;br&gt;&lt;small&gt;valores e cobertura&lt;/small&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=14;" vertex="1" parent="lane2">
+          <mxGeometry x="300" y="75" width="220" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="derived" value="PostgreSQL&lt;br&gt;&lt;small&gt;execução, derivados e cobertura&lt;/small&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=14;" vertex="1" parent="lane2">
+          <mxGeometry x="580" y="65" width="230" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="readapi" value="API de consulta&lt;br&gt;&lt;small&gt;replay, séries, cobertura, eventos&lt;/small&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=14;" vertex="1" parent="lane2">
+          <mxGeometry x="870" y="75" width="250" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="dashboard" value="Dashboard e detalhe&lt;br&gt;&lt;small&gt;valores, cobertura e falhas&lt;/small&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=14;" vertex="1" parent="lane2">
+          <mxGeometry x="1180" y="75" width="230" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="export" value="CSV&lt;br&gt;&lt;small&gt;brutos ou derivados&lt;/small&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=14;" vertex="1" parent="lane2">
+          <mxGeometry x="1480" y="75" width="200" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="mockNote" value="Telas demonstrativas locais no navegador não participam da ingestão nem do processamento conectados." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=14;fillColor=#FFF7D6;strokeColor=#D6A23A;fontSize=13;" vertex="1" parent="lane2">
+          <mxGeometry x="150" y="205" width="620" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="lê" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#64748B;fontSize=12;labelBackgroundColor=default;defaultLabelBackgroundColor=page;verticalAlign=bottom;labelPlacement=auto;" edge="1" parent="lane1" source="csv" target="runner">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="OTLP/HTTP Protobuf" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#2563EB;fontSize=12;labelBackgroundColor=default;defaultLabelBackgroundColor=page;labelPlacement=auto;" edge="1" parent="lane1" source="runner" target="collector">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="encaminha" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#2563EB;fontSize=12;labelBackgroundColor=default;defaultLabelBackgroundColor=page;labelPlacement=auto;" edge="1" parent="lane1" source="collector" target="api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="commit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#2563EB;fontSize=12;labelBackgroundColor=default;defaultLabelBackgroundColor=page;verticalAlign=bottom;labelPlacement=auto;" edge="1" parent="lane1" source="api" target="rawdb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="sucesso" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#16A34A;fontSize=12;labelBackgroundColor=default;defaultLabelBackgroundColor=page;verticalAlign=bottom;labelPlacement=auto;" edge="1" parent="lane1" source="rawdb" target="ack">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="falha" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#DC2626;fontSize=12;labelBackgroundColor=default;defaultLabelBackgroundColor=page;labelPlacement=auto;" edge="1" parent="lane1" source="api" target="fail">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="importa" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#64748B;fontSize=12;labelBackgroundColor=default;defaultLabelBackgroundColor=page;labelPlacement=auto;" edge="1" parent="lane1" source="truth" target="truthdb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="dados brutos" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#7C3AED;fontSize=12;labelBackgroundColor=default;defaultLabelBackgroundColor=page;labelPlacement=auto;" edge="1" parent="1" source="rawdb" target="batch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="processa" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#2563EB;fontSize=12;labelBackgroundColor=default;defaultLabelBackgroundColor=page;labelPlacement=auto;" edge="1" parent="lane2" source="batch" target="transform">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="grava" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#2563EB;fontSize=12;labelBackgroundColor=default;defaultLabelBackgroundColor=page;verticalAlign=bottom;labelPlacement=auto;" edge="1" parent="lane2" source="transform" target="derived">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" value="consulta" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#2563EB;fontSize=12;labelBackgroundColor=default;defaultLabelBackgroundColor=page;labelPlacement=auto;" edge="1" parent="lane2" source="derived" target="readapi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="dados" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#2563EB;fontSize=12;labelBackgroundColor=default;defaultLabelBackgroundColor=page;verticalAlign=bottom;labelPlacement=auto;" edge="1" parent="lane2" source="readapi" target="dashboard">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" value="exporta" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#16A34A;fontSize=12;labelBackgroundColor=default;defaultLabelBackgroundColor=page;verticalAlign=bottom;labelPlacement=auto;" edge="1" parent="lane2" source="dashboard" target="export">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" value="referência" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#7C3AED;fontSize=12;labelBackgroundColor=default;defaultLabelBackgroundColor=page;labelPlacement=auto;" edge="1" parent="1" source="truthdb" target="readapi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

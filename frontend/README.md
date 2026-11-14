@@ -1,6 +1,8 @@
-# AIM — Protótipo React com dados simulados
+# AIM — Frontend com replay histórico e protótipo navegável
 
 Implementação navegável do [AIM — Protótipo de Alta Fidelidade](https://www.figma.com/design/qnyP4YsWrH0l6ZzrqvcEjH), da Emendata. Interface em português brasileiro para equipes SRE, DevOps e Backend.
+
+A entrada **Replay histórico AIOpsArena** na Visão geral consulta a API FastAPI e o PostgreSQL. Ela abre o detalhe da instância com CPU em núcleos médios, taxa de respostas 200 e latência média dessas respostas, provenientes da transformação executada após a ingestão OTLP. As demais telas continuam como mock, com dados e ações simulados identificados na interface.
 
 ## Executar
 
@@ -15,10 +17,14 @@ npm ci
 3. Inicie o servidor de desenvolvimento:
 
 ```sh
-npm run dev
+npm run dev -- --host 127.0.0.1
 ```
 
 Abra o endereço exibido no terminal, normalmente **http://localhost:5173**. Para encerrar, pressione `Ctrl+C`. Não abra `index.html` diretamente: o projeto usa módulos e precisa do servidor local.
+
+Para a jornada conectada, inicie a API em **http://127.0.0.1:8000** e clique em **Iniciar demonstração** na entrada do replay. O frontend solicita uma execução pela API, acompanha os marcos persistidos e abre as séries quando estiverem disponíveis. O dataset e os destinos OTLP são configurados no backend; a interface não envia caminhos nem endereços de origem. A execução manual do replay e do batch continua disponível como alternativa técnica no [setup do backend](../system/backend/README.md). O Vite encaminha `/api` para essa API no desenvolvimento e no preview. Para outra porta local, copie `.env.example` para `.env.local` e ajuste `AIM_API_PROXY_TARGET`. `VITE_API_BASE_URL` só é necessário para chamar outra origem diretamente, com CORS permitido no backend. O frontend e a API devem permanecer em loopback nesta prova sem autenticação.
+
+Sem backend, a entrada histórica apresenta a falha de conexão; as telas mock continuam navegáveis. Uma API sem replays apresenta **Nenhum replay persistido**. A área conectada não substitui erros ou ausência de dados por exemplos locais.
 
 ## Tecnologias
 
@@ -29,9 +35,18 @@ Abra o endereço exibido no terminal, normalmente **http://localhost:5173**. Par
 - **Vitest e Playwright** para testes.
 - **Inter** servida localmente por `@fontsource/inter`, sem depender de Google Fonts.
 
-React é a biblioteca principal. TypeScript, CSS e Vite completam o projeto. Não há backend, banco de dados, chave de API ou configuração de servidor a fornecer. `node_modules` não está no ZIP: `npm ci` instala as dependências do arquivo de lock. A primeira instalação requer internet; depois, a aplicação funciona sem serviços externos.
+React é a biblioteca principal. TypeScript, CSS e Vite completam o projeto. A jornada histórica depende da API e do PostgreSQL locais; os fluxos mock funcionam no navegador. `node_modules` não está no ZIP: `npm ci` instala as dependências do arquivo de lock. A primeira instalação requer internet.
 
 ## O que funciona
+
+- Consulta de replays e instâncias reais pela API na Visão geral e abertura do detalhe histórico.
+- Início idempotente da demonstração, acompanhamento do status e dos lotes/pontos persistidos, seleção do novo replay e reabertura do último status após recarregar a página.
+- Seleção explícita da execução de transformação, sem misturar versões dos resultados.
+- Séries por intervalo com unidades, cobertura, motivo e tabela de valores consultável. Lacunas e latência indefinida por ausência de tráfego interrompem a curva; zero observado continua visível.
+- Marcador separado de falha de CPU injetada e identificadores de proveniência. Os timestamps do dataset permanecem históricos, exibidos em UTC.
+- Estados de carregamento, replay vazio, transformação pendente e falha de API.
+
+Os itens seguintes pertencem ao mock navegável:
 
 - Visão geral da malha com conectividade, monitoramento e risco separados.
 - Pausa global e individual; retomar o global preserva as pausas individuais.
@@ -46,6 +61,10 @@ React é a biblioteca principal. TypeScript, CSS e Vite completam o projeto. Nã
 - Persistência no `localStorage`, navegação por hash, histórico de voltar/avançar do navegador e adaptação básica a telas menores.
 
 ## Roteiro rápido da demonstração
+
+Para demonstrar a integração, abra **Visão geral → Replay histórico AIOpsArena** e clique em **Iniciar demonstração**. Acompanhe o status e os pontos OTLP persistidos; quando uma transformação e uma instância estiverem disponíveis, o detalhe abre e continua consultando novos marcos. No detalhe, confira fonte, instância e período; escolha uma transformação; inspecione a cobertura e a tabela de intervalos. O seletor conserva os replays anteriores. O evento é ground truth de falha injetada, sem inferência de causalidade ou saída de detector. As capturas abaixo dos testes de UI validam o contrato com respostas controladas; a prova de banco/API real deve ser realizada pelo roteiro integrado do backend.
+
+Para percorrer o mock:
 
 1. A tela inicial abre em operação nominal. Clique em um serviço para ver suas métricas.
 2. Use **Demonstração → Incidente ativo**. O modo reinicia os dados de exemplo.
@@ -66,14 +85,14 @@ Nos modos de falha, a primeira verificação ou envio falha; a ação de tentar 
 
 Datas e métricas reproduzem o cenário fictício de **08/10/2026, em BRT (UTC−03)**. Não representam a data real nem tráfego ao vivo.
 
-- Nenhuma coleta OTel, envio SMTP, injeção de falha ou mitigação real é executada.
+- No mock, nenhuma coleta OTel, envio SMTP, injeção de falha ou mitigação real é executada. A jornada histórica lê da API dados que o replayer enviou ao backend por OTLP.
 - Logs e traces abrem uma apresentação local da integração futura.
 - A projeção exibe a estimativa predefinida de aproximadamente 08:30 e, após 30 segundos de supervisão válida, uma atualização para aproximadamente 08:00. Não é um algoritmo preditivo nem um diagnóstico de causa raiz.
 - MTTA/antecedência e MTTR permanecem como **Não calculado**: os documentos não fixam todos os marcos necessários. A exportação preserva os oito campos experimentais sem inventar fórmulas.
 - Os objetivos de escaneamento em menos de 5 s e triagem em menos de 15 s exigem testes com operadores; não são garantias desta implementação.
 - Os dados são locais à origem do navegador e não são compartilhados entre dispositivos ou usuários.
 
-As decisões e a relação entre os **11 requisitos funcionais e os 10 casos de uso** estão em [docs/REQUISITOS.md](docs/REQUISITOS.md).
+O replay não fornece taxa de erro geral, p95/p99, predição, detector validado ou conclusão causal. Ele contém apenas os sinais `grpc.200.0` selecionados, com mapeamento experimental da identidade Istio. As decisões do mock e a relação entre os **11 requisitos funcionais e os 10 casos de uso** estão em [docs/REQUISITOS.md](docs/REQUISITOS.md); o contrato da jornada conectada está em [docs/INTEGRACAO-REPLAY.md](docs/INTEGRACAO-REPLAY.md).
 
 ## Compilar e testar
 
@@ -101,10 +120,12 @@ Em Linux, o Playwright pode solicitar dependências adicionais: `npx playwright 
 | `src/components/`     | Botões, switches, banners, dialogs, cards, gráficos e topologia |
 | `src/domain/model.ts` | Tipos, regras de estado, métricas e dados simulados             |
 | `src/domain/audit.ts` | Filtros e serialização CSV/JSON                                 |
+| `src/domain/replay.ts` | Tipos da API, formatação UTC e séries com cobertura              |
+| `src/api/replays.ts`  | Consultas HTTP da jornada histórica                              |
 | `src/state/Store.tsx` | Estado compartilhado e persistência local                       |
 | `src/styles.css`      | Tokens visuais e estilos responsivos                            |
 | `public/assets/`      | SVGs locais obtidos do arquivo Figma                            |
 | `tests/`              | Regras de domínio e fluxos no navegador                         |
 | `docs/`               | Rastreabilidade e decisões                                      |
 
-Para conectar uma API no futuro, substitua as respostas dos handlers de cadastro, telemetria e envio por uma camada de serviço. Mantenha o reducer como fonte única para pausas e ciclo do incidente. O mock não implementa autenticação, autorização, multiusuário ou algoritmos de detecção.
+O reducer continua responsável apenas por pausas e ciclo do incidente simulados. A jornada de replay consulta a API por uma camada separada e não usa `localStorage` para simular persistência do banco. Esta prova não implementa autenticação, autorização, multiusuário ou algoritmos de detecção.

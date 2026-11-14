@@ -1,6 +1,6 @@
 # AIM Personas
 
-**Revisado em:** 28 de outubro de 2026
+**Revisado em:** 3 de novembro de 2026
 
 AIM — Personas
 
@@ -15,6 +15,33 @@ Neste documento, **SOC Lead** designa a liderança de suporte operacional e tria
 3. Product Owner
 
 4. SRE — Site Reliability Engineer
+
+## Situação de validação e aderência à primeira versão
+
+As personas abaixo são hipóteses documentais: o repositório não registra entrevistas ou validação empírica que confirme que representam usuários reais do AIM. Carlos é um perfil nominal construído para representar um arquétipo, não uma evidência de usuário entrevistado. SOC Lead, Product Owner e SRE também descrevem papéis presumidos.
+
+Para a validação inicial em laboratório, a equipe prevê desenvolvedores como usuários técnicos e orientador/colegas convidados como possíveis participantes de avaliação. Isso ainda precisa ser confirmado com pessoas. O administrador da plataforma é um papel funcional previsto para cadastrar aplicações, fontes e usuários; as responsabilidades específicas e permissões RBAC ainda não foram definidas. Consulte a [direção preliminar da primeira versão](../projeto/escopo-primeira-versao.md).
+
+| Perfil existente | Aderência preliminar | Evidência atual |
+| --- | --- | --- |
+| SRE | Mais próximo do usuário técnico que acompanha sinais e investiga degradações. | A equipe indicou desenvolvedores como público inicial; SRE ainda não foi validado diretamente. |
+| Arquiteto de Soluções | Stakeholder potencial para validar ambientes de teste e confiabilidade arquitetural. | Persona hipotética; uso direto do AIM não confirmado. |
+| SOC Lead | Possível papel de triagem operacional de produto. | Persona hipotética; não implica escopo de cibersegurança nem foi confirmado como usuário. |
+| Product Owner | Stakeholder potencial interessado no impacto no produto. | Persona hipotética; necessidade de operar a interface não confirmada. |
+| Orientador/colega de teste | Participante de avaliação da PoC em laboratório, conforme recrutamento. | Grupo sugerido pela equipe, não persona de usuário de cliente. |
+| Desenvolvedor | Público técnico inicial e possível responsável por configurar/consultar aplicações. | Intenção da equipe; ainda não detalhada como persona nem validada com usuários. |
+
+A primeira validação deve observar quem executa cada tarefa e quais permissões precisa. Só então as personas e o RBAC devem ser consolidados como requisitos.
+
+## Perspectivas profissionais para a equipe do projeto
+
+Além das personas de usuário, a equipe pretende incorporar perspectivas profissionais para analisar partes diferentes da solução. Isso não significa que esses perfis serão usuários do produto:
+
+| Perspectiva | Contribuição esperada ao projeto | Relação com o usuário do AIM |
+| --- | --- | --- |
+| Engenheiro de dados | Modelagem, ingestão, qualidade, proveniência, séries temporais e retenção. | Consultoria/revisão; acesso ao produto depende de tarefa real. |
+| Engenheiro de machine learning | Definição de alvos/features, baselines, treino/validação/teste e avaliação de detectores. | Consultoria/revisão; pode usar ferramentas de pesquisa, sem necessariamente ser usuário operacional. |
+| Arquiteto de soluções | Implantação on-premises, integração, fronteiras de rede, segurança e operação. | A persona existente é hipótese; validar se terá acesso direto ao AIM. |
 
 Visão das personas no AIM
 

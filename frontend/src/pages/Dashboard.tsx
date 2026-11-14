@@ -2,13 +2,16 @@ import { useStore } from "../state/Store";
 import { Banner, Button, EmptyState, PageHeading } from "../components/ui";
 import { ServiceCard } from "../components/ServiceCard";
 import { IncidentCard } from "../components/Incident";
+import { ReplayEntry } from "../components/ReplayEntry";
 export function Dashboard() {
   const { state, dispatch } = useStore();
   return (
     <>
       <PageHeading title="Visão geral da malha">
-        Acompanhe sinais, reconheça riscos e investigue com contexto.
+        Consulte o replay conectado e explore os cenários demonstrativos.
       </PageHeading>
+      <ReplayEntry />
+      <div className="mock-section-heading"><span className="source-badge mock">Mock</span><h2>Malha demonstrativa</h2><p className="small muted">Os dados, alertas e ações abaixo são simulados no navegador.</p></div>
       <div className="stack dashboard">
         {!state.services.length ? (
           <EmptyState

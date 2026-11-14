@@ -1,5 +1,9 @@
 import { test, expect } from "@playwright/test";
 import type { Page } from "@playwright/test";
+// These tests cover the browser-local mock independently of the replay backend.
+test.beforeEach(async ({ page }) => {
+  await page.route("**/api/v1/replays", (route) => route.fulfill({ json: { replays: [] } }));
+});
 async function nav(page: Page, name: string) {
   await page
     .getByRole("navigation", { name: "Navegação principal" })
@@ -50,7 +54,7 @@ test("dashboard, pausas, métricas e persistência", async ({ page }) => {
   ).toHaveAttribute("aria-checked", "false");
   expect(errors).toEqual([]);
 });
-test("cadastro real, endpoint inválido, runtime e desvinculação", async ({
+test("cadastro local, endpoint inválido, runtime e desvinculação", async ({
   page,
 }) => {
   await page.goto("/#/servicos");

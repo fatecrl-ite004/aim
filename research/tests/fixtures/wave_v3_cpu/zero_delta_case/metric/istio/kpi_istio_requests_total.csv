@@ -1,3 +1,0 @@
-timestamp,cmdb_id,kpi_name,value
-100,checkout-0.source.checkout.payment,istio_requests_total.grpc.200.0,10
-105,checkout-0.source.checkout.payment,istio_requests_total.grpc.200.0,10

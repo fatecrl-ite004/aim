@@ -1,0 +1,99 @@
+services:
+  migrate:
+    profiles: [full]
+    build:
+      context: ..
+      dockerfile: system/backend/Dockerfile
+    environment:
+      AIM_DATABASE_URL: postgresql://aim:${AIM_POSTGRES_PASSWORD:?Defina AIM_POSTGRES_PASSWORD em .env.v1}@postgres:5432/aim
+    command: ["python", "-m", "aim.migrate"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    profiles: [full]
+    build:
+      context: ..
+      dockerfile: system/backend/Dockerfile
+    environment:
+      AIM_DATABASE_URL: postgresql://aim:${AIM_POSTGRES_PASSWORD:?Defina AIM_POSTGRES_PASSWORD em .env.v1}@postgres:5432/aim
+      AIM_DATASET_ROOT: /datasets/AIOpsArena
+      AIM_OTLP_METRICS_ENDPOINT: http://collector:4318/v1/metrics
+      AIM_DEMO_API_URL: http://127.0.0.1:8000
+      AIM_DEMO_CHUNK_TIMESTAMPS: ${AIM_DEMO_CHUNK_TIMESTAMPS:-8}
+      AIM_DEMO_PAUSE_SECONDS: ${AIM_DEMO_PAUSE_SECONDS:-3}
+      AIM_DEMO_INITIAL_PAUSE_SECONDS: ${AIM_DEMO_INITIAL_PAUSE_SECONDS:-3}
+    volumes:
+      - type: bind
+        source: "${AIM_DATASET_ROOT:?Defina AIM_DATASET_ROOT em .env.v1}"
+        target: /datasets/AIOpsArena
+        read_only: true
+    expose: ["8000"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/ready', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  collector:
+    profiles: [full]
+    image: otel/opentelemetry-collector-contrib@sha256:e40d61f10c9a617cca1ffd1be4d7e2b3a4b0f0001798ff07e58cabe82e618cea
+    command: ["--config=/etc/otelcol-contrib/config.yaml"]
+    volumes:
+      - ./otel-collector.yaml:/etc/otelcol-contrib/config.yaml:ro
+    ports:
+      - "127.0.0.1:${AIM_OTLP_PORT:-4318}:4318"
+      - "127.0.0.1:${AIM_OTLP_HEALTH_PORT:-13133}:13133"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+  web:
+    profiles: [full]
+    build:
+      context: ..
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "127.0.0.1:${AIM_WEB_PORT:-8080}:80"
+    depends_on:
+      api:
+        condition: service_healthy
+      collector:
+        condition: service_started
+    restart: unless-stopped
+
+  runner:
+    profiles: [tools]
+    build:
+      context: ..
+      dockerfile: system/backend/Dockerfile
+    entrypoint: ["python", "-m", "aim.cli"]
+    environment:
+      AIM_DATABASE_URL: postgresql://aim:${AIM_POSTGRES_PASSWORD:?Defina AIM_POSTGRES_PASSWORD em .env.v1}@postgres:5432/aim
+      AIM_API_URL: http://web
+      AIM_DATASET_ROOT: /datasets/AIOpsArena
+    volumes:
+      - type: bind
+        source: "${AIM_DATASET_ROOT:?Defina AIM_DATASET_ROOT em .env.v1}"
+        target: /datasets/AIOpsArena
+        read_only: true
+      - type: bind
+        source: ../.runtime/v1-docker
+        target: /runtime
+    depends_on:
+      postgres:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+      collector:
+        condition: service_started
+      web:
+        condition: service_started

@@ -14,4 +14,4 @@ A preparação deve impedir que informação do teste influencie o treino, sele�
 
 Baselines plausíveis incluem regras/limites estáticos por cenário e métodos estatísticos simples. Seleção final depende do protocolo. Medidas incluem precisão, recall, F1, PR-AUC quando aplicável, medidas por evento, falsos alertas por tempo/serviço, atraso, antecedência para um alvo de risco e custo. Point-adjust não deve ser a única medida. Métricas event-wise precisam explicitar tolerância e correspondência.
 
-Consulte [protocolo experimental](../pesquisa/protocolo-experimental.md) para o desenho ainda pendente.
+O protocolo experimental da solução completa ainda será definido; a V1 demonstra apenas o replay e as transformações descritos no [guia de execução](../../deploy.md).

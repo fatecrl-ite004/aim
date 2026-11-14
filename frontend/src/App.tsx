@@ -8,6 +8,7 @@ import { ServiceDetail } from "./pages/ServiceDetail";
 import { Services } from "./pages/Services";
 import { Notifications } from "./pages/Notifications";
 import { Audit } from "./pages/Audit";
+import { ReplayDetail } from "./pages/ReplayDetail";
 function useRoute() {
   const read = () => window.location.hash.slice(1) || "/";
   const [route, setRoute] = useState(read);
@@ -27,7 +28,8 @@ export function App() {
       tone: "success" | "critical";
     } | null>(null),
     page = route.split("?")[0],
-    active = page.startsWith("/servico/") ? "/" : page;
+    isReplay = page.startsWith("/replay/"),
+    active = page.startsWith("/servico/") || isReplay ? "/" : page;
   const notify: Notify = (message, tone = "success") =>
     setToast({ message, tone });
   useEffect(() => {
@@ -39,8 +41,15 @@ export function App() {
     document.querySelector(".workspace-scroll")?.scrollTo(0, 0);
   }, [route]);
   let serviceId = "";
+  let replayRoute: { replayId: string; serviceId: string; instanceId: string } | null = null;
   try {
     serviceId = decodeURIComponent(page.slice("/servico/".length));
+    const match = page.match(/^\/replay\/([^/]+)\/servico\/([^/]+)$/);
+    if (match) replayRoute = {
+      replayId: decodeURIComponent(match[1]),
+      serviceId: decodeURIComponent(match[2]),
+      instanceId: new URLSearchParams(route.split("?")[1]).get("instancia") ?? "",
+    };
   } catch {
     serviceId = "";
   }
@@ -89,8 +98,8 @@ export function App() {
       </aside>
       <div className="workspace">
         <header className="topbar">
-          <span>Produção / malha principal</span>
-          <Toggle
+          <span>{isReplay ? "Laboratório / replay histórico" : "Demonstração / malha simulada"}</span>
+          {!isReplay && <Toggle
             global
             checked={!state.globalPaused}
             label={
@@ -98,21 +107,22 @@ export function App() {
             }
             ariaLabel="Sentinela global"
             onChange={() => dispatch({ type: "global-toggle" })}
-          />
+          />}
         </header>
         <main id="main-content" tabIndex={-1} className="workspace-scroll">
-          {!storageAvailable && (
+          {!isReplay && !storageAvailable && (
             <Banner tone="attention" title="Persistência local indisponível">
               Os dados desta sessão funcionarão, mas poderão ser perdidos ao
               recarregar a página.
             </Banner>
           )}
-          {state.globalPaused && (
+          {!isReplay && state.globalPaused && (
             <Banner title="Ⅱ Sentinela global em pausa">
               A conectividade é mantida. O risco não está sendo avaliado; as
               pausas individuais serão preservadas ao retomar.
             </Banner>
           )}
+          {!isReplay && page !== "/" && <div className="mock-notice small">Protótipo demonstrativo · dados e ações simulados</div>}
           {page === "/" ? (
             <Dashboard />
           ) : page === "/servicos" ? (
@@ -129,6 +139,8 @@ export function App() {
             <Audit notify={notify} />
           ) : page.startsWith("/servico/") ? (
             <ServiceDetail id={serviceId} notify={notify} />
+          ) : replayRoute ? (
+            <ReplayDetail key={`${replayRoute.replayId}/${replayRoute.serviceId}/${replayRoute.instanceId}`} {...replayRoute} />
           ) : (
             <EmptyState
               title="Página não encontrada"

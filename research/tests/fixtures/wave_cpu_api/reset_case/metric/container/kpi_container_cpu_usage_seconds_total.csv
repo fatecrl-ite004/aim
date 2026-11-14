@@ -1,3 +1,0 @@
-﻿timestamp,cmdb_id,kpi_name,value
-100,observe.x-0,container_cpu_usage_seconds_total,5
-105,observe.x-0,container_cpu_usage_seconds_total,2

@@ -1,13 +1,37 @@
-# O legado permanece fora do histórico versionado.
-archive/aim_old/
+# Material anterior e pesquisa exploratoria, fora da entrega P2.
+/archive/
+/research/
 
 # Planos de trabalho locais, fora do historico versionado.
 /plans/
-/research/reports/wave_cpu_api/generated/
-/research/reports/wave_v3_cpu/generated/
-/research/reports/rcaeval_re2ob/generated/
-/research/reports/ad_microservice_app/generated/
-/research/data/
+# Documentos internos e versoes de trabalho. Diagramas finais publicos ficam em docs/diagramas/.
+/docs/decisoes/
+/docs/desenvolvimento/
+/docs/entregas/
+/docs/especificacoes/
+/docs/pesquisa/
+/docs/monografia/
+/docs/projeto/escopo-primeira-versao-ideias.*
+/docs/projeto/*.docx
+/docs/projeto/estado-atual.md
+/docs/projeto/historico.md
+/docs/evidencias/v1/revisao-*.md
+/docs/evidencias/v1/dataset-audit.json
+/frontend/docs/VERIFICACAO-REPLAY-*.md
 __pycache__/
 *.py[cod]
+
+# Ambiente local da V1, credenciais e evidencias brutas de execucao.
+/.venv/
+/.runtime/
+.env
+.env.local
+.env.v1
+.pytest_cache/
+pytest-cache-files-*/
+
+# Arquivos temporarios de edicao e copias intermediarias de documentos.
+~$*.docx
+*.tmp.docx
+*.bak.docx
 
