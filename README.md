@@ -143,9 +143,9 @@ Permanecem a definir: cenários e rotulagem científica; frequência e retençã
 
 | Integrante | Responsabilidade |
 | --- | --- |
-| Pedro Augusto de Melo Borges | A definir |
-| Thiago Guerra Soares | A definir |
-| João Paulo Cruz de Almeida Lima | A definir |
+| Pedro Augusto de Melo Borges | Dados e integração |
+| Thiago Guerra Soares | Frontend |
+| João Paulo Cruz de Almeida Lima | Arquitetura da solução |
 
 ## Documentação adicional
 
